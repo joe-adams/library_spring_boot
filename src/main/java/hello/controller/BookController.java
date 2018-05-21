@@ -1,25 +1,31 @@
 package hello.controller;
 
 import hello.model.Book;
-import hello.repository.BookRepository;
+import hello.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class BookController {
 
     @Autowired
-    private BookRepository bookRepository;
+    private BookService bookService;
 
-    @GetMapping("/book/title/{title}")
+    @GetMapping("/books/title/{title}")
     public List<Book> findByTitle(@PathVariable String title) {
-        return bookRepository.findByTitle(title);
+        return bookService.findByTitle(title);
     }
 
-    @GetMapping("/book/author/{author}")
+    @GetMapping("/books/author/{author}")
     public List<Book> findByAuthor(@PathVariable String author) {
-        return bookRepository.findByAuthor(author);
+        return bookService.findByAuthor(author);
+    }
+
+    @PostMapping("/books")
+    public Book createBook(@RequestBody Map<String, Object> json){
+        return bookService.createBook((String)json.get("title"),(String)json.get("author"));
     }
 }

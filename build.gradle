@@ -33,6 +33,7 @@ sourceCompatibility = 1.10
 targetCompatibility = 1.10
 
 dependencies {
+    compile group: 'javax.persistence', name: 'persistence-api', version: '1.0'
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("com.h2database:h2")
     compile("org.springframework:spring-jdbc")
