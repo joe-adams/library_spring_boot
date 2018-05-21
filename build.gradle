@@ -1,12 +1,19 @@
 buildscript {
     repositories {
-        mavenCentral()
+        mavenLocal()
+        jcenter()
+        maven { url "http://repo.spring.io/plugins-release" }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE")
     }
 }
 
+
+plugins {
+    id "io.spring.dependency-management" version "1.0.3.RELEASE"
+}
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -27,6 +34,7 @@ targetCompatibility = 1.10
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile("com.h2database', name: 'h2', version: '1.4.197")
+    compile("com.h2database:h2")
+    compile("org.springframework:spring-jdbc")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
