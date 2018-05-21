@@ -1,0 +1,1 @@
+The service can be tested with curls.sh
