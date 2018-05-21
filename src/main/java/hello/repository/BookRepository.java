@@ -20,13 +20,14 @@ public class BookRepository {
 
     @Transactional(readOnly=true)
     public List<Book> findByAuthor(String author) {
-        return jdbcTemplate.query("select * from book where author_id in (select id from author where name=?)",  new Object[]{author},new BookRowMapper());
+        Object[] parameters=new Object[]{author.toLowerCase()};
+        return jdbcTemplate.query("select * from book where author_id in (select id from author where lower(name)=?)", parameters,new BookRowMapper());
     }
 
     @Transactional(readOnly=true)
     public List<Book> findByTitle(String title) {
-        String likeTitle='%'+title+'%';
-        return jdbcTemplate.query("select * from book where title like ?",  new Object[]{likeTitle},new BookRowMapper());
+        Object[] parameters=new Object[]{'%'+title.toLowerCase()+'%'};
+        return jdbcTemplate.query("select * from book where lower(title) like ?",  parameters,new BookRowMapper());
     }
 }
 
